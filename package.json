@@ -1,0 +1,31 @@
+{
+  "name": "fastify_lambda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "postinstall": "tsc -p tsconfig.json",
+    "dev": "ts-node-dev --exit-child src/main.ts",
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "format": "prettier --write src"
+  },
+  "dependencies": {
+    "@fastify/aws-lambda": "^3.3.0",
+    "fastify": "^4.19.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^18.2.0",
+    "@types/node": "^20.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.60.1",
+    "@typescript-eslint/parser": "^5.60.1",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.1.6"
+  },
+  "packageManager": "yarn@3.6.1"
+}

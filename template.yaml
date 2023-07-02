@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  fastify-lambda
+
+  Sample SAM Template for fastify-lambda
+  
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  FastifyLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/lambda.handler
+      PackageType: Zip
+      Runtime: nodejs18.x
+      MemorySize: 128
+      Timeout: 500
+      Events:
+        AppEventAPI:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: any
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  FastifyLambdaEventApi:
+    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
+    Value: !Sub "https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/"
+  FastifyLambda:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt FastifyLambda.Arn
+  FastifyLambdaIamRole:
+    Description: "Implicit IAM Role created for Hello World function"
+    Value: !GetAtt FastifyLambdaRole.Arn
